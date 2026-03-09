@@ -1,4 +1,4 @@
-﻿from fastapi.testclient import TestClient
+from fastapi.testclient import TestClient
 
 from app.main import app
 
@@ -11,37 +11,36 @@ def test_health_endpoint():
     assert response.status_code == 200
     payload = response.json()
     assert payload["status"] == "ok"
+    assert payload["service"] == "ai-github-contributor-automation-agent"
 
 
-def test_use_cases_endpoint():
-    response = client.get("/use-cases")
+def test_analyze_endpoint():
+    response = client.post(
+        "/api/analyze",
+        json={"repo": "open-source-labs/api-docs-toolkit", "branch": "main"},
+    )
     assert response.status_code == 200
     payload = response.json()
-    assert payload["count"] >= 1
-    assert "customer_support" in payload["use_cases"]
+    assert payload["repo"] == "open-source-labs/api-docs-toolkit"
+    assert payload["branch"] == "main"
+    assert len(payload["issues"]) >= 1
+    assert {"id", "title", "severity", "file_path", "rationale"} <= set(payload["issues"][0].keys())
 
 
-def test_agent_run_endpoint():
+def test_demo_endpoint():
     response = client.post(
-        "/agent/run",
+        "/api/demo",
         json={
-            "user_id": "test-user",
-            "session_id": "test-session",
-            "message": "I need a refund for a duplicate charge.",
-            "use_case": "customer_support",
-            "use_retrieval": True,
+            "repo": "open-source-labs/api-docs-toolkit",
+            "branch": "main",
         },
     )
-
     assert response.status_code == 200
     payload = response.json()
-    assert payload["use_case"] == "customer_support"
-    assert payload["intent"] in {
-        "billing_issue",
-        "refund_request",
-        "access_issue",
-        "scheduling",
-        "general_support",
-    }
-    assert "trace" in payload
-
+    assert "analyze" in payload
+    assert "fixes" in payload
+    assert "pr_draft" in payload
+    assert "docs_update" in payload
+    assert payload["analyze"]["repo"] == "open-source-labs/api-docs-toolkit"
+    assert payload["analyze"]["branch"] == "main"
+    assert len(payload["fixes"]) >= 1
