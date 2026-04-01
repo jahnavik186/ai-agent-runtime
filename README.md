@@ -1,6 +1,6 @@
 # AI GitHub Contributor Automation Agent
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/jahnavik186/ai-github-contributor-automation-agent?style=for-the-badge)](https://hub.docker.com/r/jahnavik186/ai-github-contributor-automation-agent)
+[![Docker Pulls](https://img.shields.io/docker/pulls/jahnavik186/ai-github-contributor-automation-agent?style=for-the-badge&logo=docker)](https://hub.docker.com/r/jahnavik186/ai-github-contributor-automation-agent)
 [![Docker Image](https://img.shields.io/badge/docker-jahnavik186%2Fai--github--contributor--automation--agent-blue?style=for-the-badge&logo=docker)](https://hub.docker.com/r/jahnavik186/ai-github-contributor-automation-agent)
 [![GitHub Stars](https://img.shields.io/github/stars/jahnavik186/AI-Github-Contributor-Automation-Agent?style=for-the-badge)](https://github.com/jahnavik186/AI-Github-Contributor-Automation-Agent)
 [![GitHub Forks](https://img.shields.io/github/forks/jahnavik186/AI-Github-Contributor-Automation-Agent?style=for-the-badge)](https://github.com/jahnavik186/AI-Github-Contributor-Automation-Agent)
